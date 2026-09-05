@@ -832,6 +832,56 @@ function botReply(message) {
 
 }
 
+
+/* =========================
+   PAYMENT INSTRUCTIONS
+========================= */
+
+const paymentMethod =
+document.getElementById("paymentMethod");
+
+const paymentText =
+document.getElementById("paymentText");
+
+paymentMethod.addEventListener("change", function(){
+
+    if(this.value === "PayPal"){
+
+        paymentText.innerHTML =
+        "💰 <strong>PayPal Payment</strong><br><br>" +
+        "Send your payment to our PayPal account:<br>" +
+        "<strong>nornica521@gmail.com</strong><br><br>" +
+        "After payment, send confirmation to email.";
+
+    }
+
+    else if(this.value === "M-Pesa"){
+
+        paymentText.innerHTML =
+        "📱 <strong>M-Pesa Payment</strong><br><br>" +
+        "Send your payment to:<br>" +
+        "<strong>0706986818</strong><br><br>" +
+        "Account/Name: <strong>ACADEMIC WRITING</strong><br><br>" +
+        "After payment, send M-Pesa confirmation message to email.";
+
+    }
+
+    else if(this.value === "Credit/Debit Card"){
+
+        paymentText.innerHTML =
+        "💳 <strong>Credit/Debit Card Payment</strong><br><br>" +
+        "Card payments are processed securely through our payment gateway." +
+        "<br><br>" +
+        "<a href=\"YOUR-PAYMENT-LINK\" target=\"_blank\">" +
+        "Click here to pay securely by card" +
+        "</a>";
+
+    }
+
+});
+
+Show quoted text
+
 </script>
 </body>
 </html>
