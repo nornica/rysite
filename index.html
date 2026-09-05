@@ -834,5 +834,46 @@ function botReply(message) {
 
 
 </script>
+<!-- PAYMENT INSTRUCTIONS -->
+<script>
+const paymentMethod = document.getElementById("paymentMethod");
+const paymentText = document.getElementById("paymentText");
+
+paymentMethod.addEventListener("change", function () {
+
+    if (this.value === "paypal") {
+
+        paymentText.innerHTML =
+        "💰 <strong>PayPal Payment</strong><br><br>" +
+        "Send your payment to our PayPal account:<br>" +
+        "<strong>nornica521@gmail.com</strong><br><br>" +
+        "After payment, please send your PayPal transaction confirmation to our email.";
+
+    }
+
+    else if (this.value === "mpesa") {
+
+        paymentText.innerHTML =
+        "📱 <strong>M-Pesa Payment</strong><br><br>" +
+        "Send your payment to:<br>" +
+        "<strong>0706986818</strong><br><br>" +
+        "Account/Name: <strong>ACADEMIC WRITING</strong><br><br>" +
+        "After payment, please send your M-Pesa confirmation message to our email.";
+
+    }
+
+    else if (this.value === "card") {
+
+        paymentText.innerHTML =
+        "💳 <strong>Credit/Debit Card Payment</strong><br><br>" +
+        "Card payments are processed securely through our payment gateway.<br><br>" +
+        "<a href=\"YOUR-PAYMENT-LINK\" target=\"_blank\" rel=\"noopener\">" +
+        "Click here to pay securely by card" +
+        "</a>";
+
+    }
+
+});
+</script>
 </body>
 </html>
