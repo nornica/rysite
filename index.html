@@ -455,13 +455,75 @@ country.addEventListener("change", function () {
 </div>
 
 <script>
-const pages=document.getElementById("pages");
-const price=document.getElementById("price");
+const level = document.getElementById("level");
+const pages = document.getElementById("pages");
+const deadline = document.getElementById("deadline");
+const price = document.getElementById("price");
 
-pages.addEventListener("input",()=>{
-let total=pages.value*10;
-price.innerHTML="Total Price: $"+total;
-});
+function calculatePrice() {
+
+    // Price per page according to academic level
+    const levelPrices = {
+        "High School": 10,
+        "College": 12,
+        "Undergraduate": 15,
+        "Masters": 20,
+        "PhD": 25,
+        "None": 10
+    };
+
+    // Get selected academic level
+    const pricePerPage = levelPrices[level.value] || 10;
+
+    // Number of pages
+    const numberOfPages = parseInt(pages.value) || 1;
+
+    // Base price
+    let total = pricePerPage * numberOfPages;
+
+    // Deadline surcharge
+    if (deadline.value) {
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const selectedDate = new Date(deadline.value + "T00:00:00");
+
+        const difference =
+            selectedDate.getTime() - today.getTime();
+
+        const daysUntilDeadline =
+            Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        // Urgent deadline pricing
+        if (daysUntilDeadline <= 1) {
+            total += 20;
+        }
+        else if (daysUntilDeadline <= 3) {
+            total += 15;
+        }
+        else if (daysUntilDeadline <= 7) {
+            total += 10;
+        }
+        else if (daysUntilDeadline <= 14) {
+            total += 5;
+        }
+    }
+
+    price.innerHTML = "Total Price: $" + total.toFixed(2);
+}
+
+// Recalculate when academic level changes
+level.addEventListener("change", calculatePrice);
+
+// Recalculate while pages are changed
+pages.addEventListener("input", calculatePrice);
+
+// Recalculate when deadline changes
+deadline.addEventListener("change", calculatePrice);
+
+// Calculate initial price
+calculatePrice();
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 e.preventDefault();
